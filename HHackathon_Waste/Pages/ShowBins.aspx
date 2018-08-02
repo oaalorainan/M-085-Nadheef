@@ -3,9 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder111" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+
     <div class="row">
         <div class="col-lg-10">
             <asp:Literal ID="literal1" runat="server" />
+            <div id='map' style='width: 1250px; height: 800px;'></div>
         </div>
         <div class="col-lg-2">
             <div class="row">
@@ -21,25 +25,25 @@
             <div class="card card-info">
                 <div class="row">
                     <div class="col-xs-4">
-                        <img src="../assets/img/rdPin.png" class="img img-responsive" />
+                        <img src="../assets/img/redBin.png" class="img img-responsive" style="padding:5px;"/>
                     </div>
-                    <div class="col-xs-8">
-                        <p>Limit Reached</p>
+                    <div class="col-xs-8" style="padding:15px;">
+                        <span style="top:0; bottom:0;">Limit Reached</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4">
-                        <img src="../assets/img/ylPin.png" class="img img-responsive" />
+                        <img src="../assets/img/yellowBin.png" class="img img-responsive" style="padding:5px;" />
                     </div>
-                    <div class="col-xs-8">
+                    <div class="col-xs-8" style="padding:15px;">
                         Above 75%
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-4">
-                        <img src="../assets/img/grPin.png" class="img img-responsive" />
+                        <img src="../assets/img/greenBin.png" class="img img-responsive" style="padding:5px;" />
                     </div>
-                    <div class="col-xs-8">
+                    <div class="col-xs-8"  style="padding:15px;">
                         Bellow 75%
                     </div>
                 </div>
@@ -86,4 +90,7 @@
         </div>
     </div>
     <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick" Interval="7000"></asp:Timer>
+            
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

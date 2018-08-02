@@ -26,10 +26,12 @@ namespace HHackathon_Waste
             else
                 GridView1.Visible = false;
 
-            ShowBinsOnMap();
+            if (!IsPostBack)
+                literal1.Text = "<div id='map' style='width: 1250px; height: 800px;'></div>" + ShowBinsOnMap();
+            
         }
 
-        public void ShowBinsOnMap()
+        public string ShowBinsOnMap()
         {
             string connString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
@@ -40,19 +42,19 @@ namespace HHackathon_Waste
             dadapter.Fill(table);
             conn.Close();
 
-            #region
-
-            literal1.Text = "<div id='map' style='width: 1250px; height: 800px;'></div>" +
-            "<script type='text/javascript'>" +
+            #region --GOOGLE MAPS API--
+            
+            //literal1.Text = "<div id='map' style='width: 1250px; height: 800px;'></div>" +
+            literal1.Text= "<script type='text/javascript'>" +
             "var locations = [";
 
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                literal1.Text += "['<p style=\"font-weight:bold; background-color:#7A9FAF; color:White; padding-left:3px; padding-right:3px;\">" + table.Rows[i]["description"].ToString()+"</p><br/>"+
-                    "Current Waste Level: " + table.Rows[i]["CurrentWasteLevel"].ToString() + "%<br/>"+
-                    "Total Number of Pickups: "+table.Rows[i]["CollectCount"].ToString()+"<br/>" +
-                    "Has Solid Content: "+(table.Rows[i]["Currentsolids"].ToString()=="True"? "Yes":"No")+"<br/>" +
-                    "Has Liquid Content: " + (table.Rows[i]["Currentliquids"].ToString() == "True" ? "Yes" : "No") + "<br/>'," +
+                literal1.Text += "['<p style=\"font-weight:bold; background-color:#7A9FAF; color:White; padding-left:3px; padding-right:3px;\">" + table.Rows[i]["description"].ToString() + "</p><br/>" +
+                    "Current Waste Level: " + table.Rows[i]["CurrentWasteLevel"].ToString() + "%<br/>" +
+                    "Total Number of Pickups: " + table.Rows[i]["CollectCount"].ToString() + "<br/>" +
+                    "Has Solid Content: " + (table.Rows[i]["Currentsolids"].ToString() == "1" ? "Yes" : "No") + "<br/>" +
+                    "Has Liquid Content: " + (table.Rows[i]["Currentliquids"].ToString() == "1" ? "Yes" : "No") + "<br/>'," +
                     table.Rows[i]["latitute"].ToString() + "," + table.Rows[i]["longitude"].ToString() + "," +
                     i + "],";
             }
@@ -71,10 +73,11 @@ namespace HHackathon_Waste
           }
 
             literal1.Text +="};"+
+                "var iconBase='../assets/img/';" +
             "var icons = [" +
-                "iconURLPrefix + 'red-dot.png'," +
-                "iconURLPrefix + 'yellow-dot.png'," +
-                "iconURLPrefix + 'green-dot.png'," +
+                "iconBase + 'redBin.png'," +
+                "iconBase + 'yellowBin.png'," +
+                "iconBase + 'greenBin.png'," +
             "];" +
             "var iconsLength = icons.length;" +
             "var map = new google.maps.Map(document.getElementById('map'), {" +
@@ -137,11 +140,15 @@ namespace HHackathon_Waste
             "autoCenter();" +
             "</script>";
             #endregion
+
+            string _script = literal1.Text;
+            return _script;
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            ShowBinsOnMap();
+            //ShowBinsOnMap();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", ShowBinsOnMap(), false);
         }
 
         protected void lBtn_Click(object sender, EventArgs e)
@@ -157,7 +164,7 @@ namespace HHackathon_Waste
                 lblLoop.Text = "Stop Loop";
             }
         }
-
+        
         protected void cbxShowGraph_CheckedChanged(object sender, EventArgs e)
         {
             if (cbxShowGraph.Checked)
