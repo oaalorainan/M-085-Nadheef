@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbWasteModelStoreContainer" CdmEntityContainer="WBEntities">
+    <EntitySetMapping Name="WBins">
+      <EntityTypeMapping TypeName="DbWasteModel.WBin">
+        <MappingFragment StoreEntitySet="WBin">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="latitute" ColumnName="latitute" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
