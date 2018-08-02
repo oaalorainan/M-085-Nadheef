@@ -3,13 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder111" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
 
     <div class="row">
         <div class="col-lg-10">
             <asp:Literal ID="literal1" runat="server" />
-            <div id='map' style='width: 1250px; height: 800px;'></div>
         </div>
         <div class="col-lg-2">
             <div class="row">
@@ -91,6 +88,4 @@
     </div>
     <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick" Interval="7000"></asp:Timer>
             
-        </ContentTemplate>
-    </asp:UpdatePanel>
 </asp:Content>

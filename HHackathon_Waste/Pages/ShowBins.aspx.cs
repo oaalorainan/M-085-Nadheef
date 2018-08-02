@@ -26,12 +26,11 @@ namespace HHackathon_Waste
             else
                 GridView1.Visible = false;
 
-            if (!IsPostBack)
-                literal1.Text = "<div id='map' style='width: 1250px; height: 800px;'></div>" + ShowBinsOnMap();
+            ShowBinsOnMap();
             
         }
 
-        public string ShowBinsOnMap()
+        public void ShowBinsOnMap()
         {
             string connString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
@@ -44,8 +43,8 @@ namespace HHackathon_Waste
 
             #region --GOOGLE MAPS API--
             
-            //literal1.Text = "<div id='map' style='width: 1250px; height: 800px;'></div>" +
-            literal1.Text= "<script type='text/javascript'>" +
+            literal1.Text = "<div id='map' style='width: 1250px; height: 800px;'></div>" +
+            "<script type='text/javascript'>" +
             "var locations = [";
 
             for (int i = 0; i < table.Rows.Count; i++)
@@ -142,13 +141,13 @@ namespace HHackathon_Waste
             #endregion
 
             string _script = literal1.Text;
-            return _script;
+            //return _script;
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            //ShowBinsOnMap();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", ShowBinsOnMap(), false);
+            ShowBinsOnMap();
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", ShowBinsOnMap(), false);
         }
 
         protected void lBtn_Click(object sender, EventArgs e)
