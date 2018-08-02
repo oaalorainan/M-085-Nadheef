@@ -16,9 +16,6 @@ namespace HHackathon_Waste.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable DTLinear = GetWastesByMaxLevel();
-            //Application["WasteTable"] =DT ;
-            GridView1.DataSource = DTLinear;
-            GridView1.DataBind();
 
             string BinsW_LevelList = string.Join(", ", DTLinear.Rows.OfType<DataRow>().Select(r => r["Waste_Level"].ToString()));
             string BinsDescList = string.Join(", ", DTLinear.Rows.OfType<DataRow>().Select(r => @"""" + r["description"].ToString() + @""""));
@@ -141,21 +138,6 @@ namespace HHackathon_Waste.Pages
 
             DataTable DT = new DB_Class().Select(CMD);
             return DT;
-        }
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
-        {
-
-        }
-
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            GridView1.DataBind();
-            //UpdatePanel1.Update();
         }
     }
 }

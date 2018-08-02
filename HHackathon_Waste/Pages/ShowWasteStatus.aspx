@@ -71,16 +71,4 @@
         </div>
 
     </div>
-  
-
-    <%--    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>--%>
-
-            <asp:Timer ID="Timer1" Interval="60000" runat="server" OnTick="Timer1_Tick"></asp:Timer>
-            <asp:GridView ID="GridView1" runat="server" DataKeyNames="ID" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Visible="False"></asp:GridView>
-
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [WastePickups]"></asp:SqlDataSource>
-
-  <%--      </ContentTemplate>
-    </asp:UpdatePanel>--%>
  </asp:Content>
